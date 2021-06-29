@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,8 @@ namespace CodeBase.Controls.CubeRub
     [SerializeField] private Vector3 _size;
 
     private readonly List<GameObject> _cubePartsList = new List<GameObject>();
+
+    public event Action Spawning;
 
     public List<GameObject> CubePartsList => _cubePartsList;
 
@@ -34,6 +37,7 @@ namespace CodeBase.Controls.CubeRub
             _cubePartsList.Add(newPiece);
 
             _centerPivot.position = GetCenterPosition();
+            Spawning?.Invoke();
           }
         }
       }
