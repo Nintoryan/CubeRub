@@ -75,7 +75,7 @@ namespace CodeBase.Controls.CubeRub
       while (angele < 90)
       {
         foreach (GameObject piece in listCubePieces)
-          piece.transform.RotateAround(_spawnCube.CenterPiece.transform.position, rotationAxes, 5);
+          piece.transform.RotateAround(_spawnCube.CenterPiece.position, rotationAxes, 5);
 
         angele += 5;
       

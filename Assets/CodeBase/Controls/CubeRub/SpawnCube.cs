@@ -5,14 +5,15 @@ namespace CodeBase.Controls.CubeRub
 {
   public class SpawnCube : MonoBehaviour
   {
+    [SerializeField] private Transform _centerPivot;
     [SerializeField] private GameObject _cubeTemplate;
     [SerializeField] private Vector3 _size;
 
-    private List<GameObject> _cubePartsList = new List<GameObject>();
-    
+    private readonly List<GameObject> _cubePartsList = new List<GameObject>();
+
     public List<GameObject> CubePartsList => _cubePartsList;
 
-    public GameObject CenterPiece { get; private set; }
+    public Transform CenterPiece => _centerPivot;
 
     private void Start() =>
       Spawn();
@@ -31,11 +32,17 @@ namespace CodeBase.Controls.CubeRub
             newPiece.GetComponent<CubePiece>().SetColor(-x, -y, z);
 
             _cubePartsList.Add(newPiece);
+
+            _centerPivot.position = GetCenterPosition();
           }
         }
       }
+    }
 
-      CenterPiece = _cubePartsList[(int)(_size.x * _size.y * _size.z / 2)];
+    private Vector3 GetCenterPosition()
+    {
+      return new Vector3(-_size.x / 2 + 0.5f, -_size.y / 2 + 0.5f, _size.z / 2);
+      // return _cubePartsList[(int) (_size.x * _size.y * _size.z / 2)].transform.position;
     }
   }
 }
