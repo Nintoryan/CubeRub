@@ -9,6 +9,7 @@ namespace CodeBase.Controls.CubeRub
   public class CubeRotation : MonoBehaviour
   {
     [SerializeField] private SpawnCube _spawnCube;
+    [SerializeField] private Transform _cubeCast;
 
     private Touchpad _touchpad;
     private bool _canRotate = true;
@@ -22,21 +23,21 @@ namespace CodeBase.Controls.CubeRub
 
     private List<GameObject> DownPieces
       => _spawnCube.CubePartsList.FindAll(x => Mathf.Round(x.transform.localPosition.y) == -2);
-    
+
 
     private List<GameObject> FrontPieces
       => _spawnCube.CubePartsList.FindAll(x => Mathf.Round(x.transform.localPosition.x) == 0);
 
     private List<GameObject> BackPieces
       => _spawnCube.CubePartsList.FindAll(x => Mathf.Round(x.transform.localPosition.x) == -2);
-    
+
 
     private List<GameObject> LeftPieces
       => _spawnCube.CubePartsList.FindAll(x => Mathf.Round(x.transform.localPosition.z) == 0);
 
     private List<GameObject> RightPieces
       => _spawnCube.CubePartsList.FindAll(x => Mathf.Round(x.transform.localPosition.z) == 2);
-    
+
 
     private List<GameObject> CenterXPieces
       => _spawnCube.CubePartsList.FindAll(x => Mathf.Round(x.transform.localPosition.x) == -1);
@@ -52,43 +53,15 @@ namespace CodeBase.Controls.CubeRub
     private void Start()
     {
       _mainCamera = Camera.main;
-      
+
       _touchpad = FindObjectOfType<Touchpad>();
-      _touchpad.Pressed += UpdateSelector;
-      _touchpad.Upped += SetAxisRotation;
     }
+
 
     private void Update()
     {
       if (_canRotate)
         ChekInput();
-    }
-
-    private void SetAxisRotation()
-    {
-      Vector3 direction = (_touchpad.PressingPosition - _touchpad.DraggedPosition);
-
-      if (_selectedPiece != null && Mathf.Round(_selectedPiece.position.y) == 0)
-      {
-        if (direction.x > direction.y && direction.x > direction.z)
-        {
-          StartCoroutine(Rotate(UpPieces, new Vector3(0, 1, 0)));
-        }
-        else if (direction.x < direction.y && direction.x < direction.z)
-        {
-          StartCoroutine(Rotate(UpPieces, new Vector3(0, -1, 0)));
-        }
-        else if (direction.y > direction.x && direction.y > direction.z)
-        {
-          StartCoroutine(Rotate(LeftPieces, new Vector3(0, 0, -1)));
-        }
-        else if (direction.y < direction.x && direction.y < direction.z)
-        {
-          StartCoroutine(Rotate(LeftPieces, new Vector3(0, 0, 1)));
-        }
-      }
-
-      _selectedPiece = null;
     }
 
     private void ChekInput()
@@ -136,14 +109,6 @@ namespace CodeBase.Controls.CubeRub
       }
 
       _canRotate = true;
-    }
-
-    private void UpdateSelector()
-    {
-      Ray ray = _mainCamera.ScreenPointToRay(_touchpad.PressingPosition);
-
-      if (Physics.Raycast(ray, out var hit, Mathf.Infinity))
-        _selectedPiece = hit.collider.transform;
     }
   }
 }
