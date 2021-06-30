@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using CodeBase.Controls.Inputs;
 using UnityEngine;
@@ -15,6 +16,8 @@ namespace CodeBase.Controls.CubeRub
     private bool _canRotate = true;
     private Camera _mainCamera;
     private Transform _selectedPiece;
+
+    public event Action Roating;
 
     #region AxesRotation
 
@@ -56,7 +59,6 @@ namespace CodeBase.Controls.CubeRub
 
       _touchpad = FindObjectOfType<Touchpad>();
     }
-
 
     private void Update()
     {
@@ -109,6 +111,8 @@ namespace CodeBase.Controls.CubeRub
       }
 
       _canRotate = true;
+      
+      Roating?.Invoke();
     }
   }
 }

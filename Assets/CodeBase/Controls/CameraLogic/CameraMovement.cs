@@ -22,11 +22,6 @@ namespace CodeBase.Controls.CameraLogic
 
     private void LateUpdate()
     {
-      if (Input.GetMouseButtonDown(0))
-      {
-       
-      }
-      
       if (Input.GetMouseButton(0))
       {
         Ray ray = _mainCamera.ScreenPointToRay(_touchpad.PressingPosition);
