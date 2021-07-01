@@ -27,12 +27,6 @@ public class GizmosController : MonoBehaviour
 
   void OnMouseDrag()
   {
-    // Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
-//
-    // Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint);
-    // 
-    // transform.position = curPosition;
-
     gameObject.layer = 2;
 
     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -48,6 +42,7 @@ public class GizmosController : MonoBehaviour
   private void OnMouseUp()
   {
     Vector3 direction = (transform.position - _originPosition).normalized;
+    Debug.Log(direction);
 
     transform.position = _originPosition;
     gameObject.layer = 0;
