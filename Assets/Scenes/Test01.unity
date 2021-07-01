@@ -545,7 +545,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _centerPivot: {fileID: 439801924}
   _cubeTemplate: {fileID: 6190555557224711283, guid: 11191dcf8534ec84ca72d37618ffdbb8, type: 3}
-  _size: {x: 1, y: 3, z: 1}
+  _size: {x: 3, y: 3, z: 3}
 --- !u!4 &1138784628
 Transform:
   m_ObjectHideFlags: 0
