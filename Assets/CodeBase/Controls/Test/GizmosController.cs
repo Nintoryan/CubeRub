@@ -1,38 +1,12 @@
-using CodeBase.Controls.CubeRub;
 using UnityEngine;
 
 public class GizmosController : MonoBehaviour
 {
-  private Vector3 screenPoint;
-  private Vector3 offset;
+  private Vector3 _endPosition;
 
-  private Vector3 _originPosition;
-
-  private void Start()
-  {
-    CubeRotation cubeRotation = transform.root.GetComponent<CubeRotation>();
-    cubeRotation.Roating += UpdatePosition;
-    UpdatePosition();
-  }
-
-  private void UpdatePosition()
-  {
-    _originPosition = transform.position;
-  }
-
-  void OnMouseDown()
-  {
-    screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
-  }
 
   void OnMouseDrag()
   {
-    // Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
-//
-    // Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint);
-    // 
-    // transform.position = curPosition;
-
     gameObject.layer = 2;
 
     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -41,15 +15,32 @@ public class GizmosController : MonoBehaviour
 
     if (Physics.Raycast(ray, out hit, Mathf.Infinity))
     {
-      transform.position = hit.point;
+      _endPosition = hit.point;
     }
   }
 
   private void OnMouseUp()
   {
-    Vector3 direction = (transform.position - _originPosition).normalized;
+    Vector3 project = Vector3.ProjectOnPlane(_endPosition - transform.position, transform.forward);
+    float xyAngle = Vector3.SignedAngle(project, transform.up, transform.forward);
+ 
+    if (xyAngle < 45 && xyAngle > -45)
+    {
+      print("RIGHT");
+    }
+    else if (xyAngle > 135 && xyAngle < 180 || xyAngle < -135 && xyAngle > -180)
+    {
+      print("LEFT");
+    }
+    else if (xyAngle < -45 && xyAngle > -135)
+    {
+      print("UP");
+    }
+    else if (xyAngle > 45 && xyAngle < 135)
+    {
+      print("DOWN");
+    }
 
-    transform.position = _originPosition;
     gameObject.layer = 0;
   }
 }

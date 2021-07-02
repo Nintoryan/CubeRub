@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace CodeBase.Controls.CubeRub
@@ -8,7 +9,7 @@ namespace CodeBase.Controls.CubeRub
   {
     [SerializeField] private Transform _centerPivot;
     [SerializeField] private GameObject _cubeTemplate;
-    [SerializeField] private Vector3 _size;
+    [SerializeField] private Vector3Int _size;
 
     private readonly List<GameObject> _cubePartsList = new List<GameObject>();
 
@@ -41,12 +42,31 @@ namespace CodeBase.Controls.CubeRub
           }
         }
       }
+
+      List<CubeBigFace> _cubeBigFaces = new List<CubeBigFace>();
+      
+      for (int i = 0; i < Mathf.Max(Mathf.Max(_size.x, _size.y), _size.z); i++)
+      {
+        var simXFace = _cubePartsList.Where(c => Math.Abs(c.transform.localPosition.x - -i) < 0.01f).ToList();
+        var simYFace = _cubePartsList.Where(c => Math.Abs(c.transform.localPosition.y - -i) < 0.01f).ToList();
+        var simZFace = _cubePartsList.Where(c => Math.Abs(c.transform.localPosition.z - i) < 0.01f).ToList();
+        
+        if (_size.x >= i)
+        {
+          _cubeBigFaces.Add(new CubeBigFace(simXFace, new Similar(Axis.x,-i)));
+        }
+        if (_size.y >= i)
+        {
+          _cubeBigFaces.Add(new CubeBigFace(simYFace, new Similar(Axis.y,-i)));
+        }
+        if (_size.z >= i)
+        {
+          _cubeBigFaces.Add(new CubeBigFace(simZFace, new Similar(Axis.z,-i)));
+        }
+      }
     }
 
-    private Vector3 GetCenterPosition()
-    {
-      return new Vector3(-_size.x / 2 + 0.5f, -_size.y / 2 + 0.5f, _size.z / 2);
-      // return _cubePartsList[(int) (_size.x * _size.y * _size.z / 2)].transform.position;
-    }
+    private Vector3 GetCenterPosition() => 
+      new Vector3((float)-_size.x / 2 + 0.5f, (float)-_size.y / 2 + 0.5f, (float)_size.z / 2);
   }
 }

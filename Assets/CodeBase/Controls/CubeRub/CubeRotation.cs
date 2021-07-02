@@ -21,34 +21,34 @@ namespace CodeBase.Controls.CubeRub
 
     #region AxesRotation
 
-    private List<GameObject> UpPieces
+    public List<GameObject> UpPieces
       => _spawnCube.CubePartsList.FindAll(x => Mathf.Round(x.transform.localPosition.y) == 0);
 
-    private List<GameObject> DownPieces
+    public List<GameObject> DownPieces
       => _spawnCube.CubePartsList.FindAll(x => Mathf.Round(x.transform.localPosition.y) == -2);
 
 
-    private List<GameObject> FrontPieces
+    public List<GameObject> FrontPieces
       => _spawnCube.CubePartsList.FindAll(x => Mathf.Round(x.transform.localPosition.x) == 0);
 
-    private List<GameObject> BackPieces
+    public List<GameObject> BackPieces
       => _spawnCube.CubePartsList.FindAll(x => Mathf.Round(x.transform.localPosition.x) == -2);
 
 
-    private List<GameObject> LeftPieces
+    public List<GameObject> LeftPieces
       => _spawnCube.CubePartsList.FindAll(x => Mathf.Round(x.transform.localPosition.z) == 0);
 
-    private List<GameObject> RightPieces
+    public List<GameObject> RightPieces
       => _spawnCube.CubePartsList.FindAll(x => Mathf.Round(x.transform.localPosition.z) == 2);
 
 
-    private List<GameObject> CenterXPieces
+    public List<GameObject> CenterXPieces
       => _spawnCube.CubePartsList.FindAll(x => Mathf.Round(x.transform.localPosition.x) == -1);
 
-    private List<GameObject> CenterZPieces
+    public List<GameObject> CenterZPieces
       => _spawnCube.CubePartsList.FindAll(x => Mathf.Round(x.transform.localPosition.z) == 1);
 
-    private List<GameObject> CenterYPieces
+    public List<GameObject> CenterYPieces
       => _spawnCube.CubePartsList.FindAll(x => Mathf.Round(x.transform.localPosition.y) == -1);
 
     #endregion Rotation
@@ -94,6 +94,9 @@ namespace CodeBase.Controls.CubeRub
 
       #endregion
     }
+
+    public void RotateFace(List<GameObject> listCubePieces, Vector3 rotationAxes) => 
+      StartCoroutine(Rotate(listCubePieces, rotationAxes));
 
     IEnumerator Rotate(List<GameObject> listCubePieces, Vector3 rotationAxes)
     {
