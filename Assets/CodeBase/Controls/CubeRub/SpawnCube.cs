@@ -8,10 +8,12 @@ namespace CodeBase.Controls.CubeRub
   public class SpawnCube : MonoBehaviour
   {
     [SerializeField] private Transform _centerPivot;
-    [SerializeField] private GameObject _cubeTemplate;
+    [SerializeField] private CubePiece _cubeTemplate;
     [SerializeField] private Vector3Int _size;
+    [SerializeField] private CubeRotation _cubeRotation;
 
     private readonly List<GameObject> _cubePartsList = new List<GameObject>();
+    private List<CubeBigFace> allBigFaces;
 
     public event Action Spawning;
 
@@ -19,8 +21,12 @@ namespace CodeBase.Controls.CubeRub
 
     public Transform CenterPiece => _centerPivot;
 
-    private void Start() =>
+    private void Start()
+    {
       Spawn();
+      _cubeRotation.Roating += RecalculateWholeCube;
+    }
+      
 
     private void Spawn()
     {
@@ -30,45 +36,56 @@ namespace CodeBase.Controls.CubeRub
         {
           for (int z = 0; z < _size.z; z++)
           {
-            GameObject newPiece = Instantiate(_cubeTemplate, transform, false);
-            newPiece.name = $"{x} {y} {z}";
-            newPiece.transform.localPosition = new Vector3(-x, -y, z);
-            newPiece.GetComponent<CubePiece>().SetColor(-x, -y, z);
-
-            _cubePartsList.Add(newPiece);
-
+            var newPiece = Instantiate(_cubeTemplate, transform, false);
+            newPiece.Initialize(x,y,z,_size);
+            _cubePartsList.Add(newPiece.gameObject);
             _centerPivot.position = GetCenterPosition();
             Spawning?.Invoke();
           }
         }
       }
-
-      List<CubeBigFace> _cubeBigFaces = new List<CubeBigFace>();
-      for (int i = 0; i < Mathf.Max(Mathf.Max(_size.x, _size.y), _size.z); i++)
-      {
-        var simXFace = _cubePartsList.Where(c => Math.Abs(c.transform.localPosition.x - -i) < 0.01f).ToList();
-        var simYFace = _cubePartsList.Where(c => Math.Abs(c.transform.localPosition.y - -i) < 0.01f).ToList();
-        var simZFace = _cubePartsList.Where(c => Math.Abs(c.transform.localPosition.z - i) < 0.01f).ToList();
-        if (_size.x >= i)
-        {
-          _cubeBigFaces.Add(new CubeBigFace(simXFace, new Similar(Axis.x,-i)));
-        }
-        if (_size.y >= i)
-        {
-          _cubeBigFaces.Add(new CubeBigFace(simYFace, new Similar(Axis.y,-i)));
-        }
-        if (_size.z >= i)
-        {
-          _cubeBigFaces.Add(new CubeBigFace(simZFace, new Similar(Axis.z,-i)));
-        }
-      }
+      RecalculateWholeCube();
     }
-    
-
     private Vector3 GetCenterPosition()
     {
       return new Vector3((float)-_size.x / 2 + 0.5f, (float)-_size.y / 2 + 0.5f, (float)_size.z / 2);
-      // return _cubePartsList[(int) (_size.x * _size.y * _size.z / 2)].transform.position;
     }
+    
+    private void RecalculateWholeCube()
+    {
+      foreach (var _gameObject in _cubePartsList)
+      {
+        _gameObject.GetComponent<CubePiece>().Planes = new List<CubeBigFace>();
+      }
+      RecalculateBigFaces();
+      foreach (var _gameObject in _cubePartsList)
+      {
+        _gameObject.GetComponent<CubePiece>().RecalculateFaces();
+      }
+    }
+    private void RecalculateBigFaces()
+         {
+           var _cubeBigFaces = new List<CubeBigFace>();
+           
+           for (int i = 0; i < Mathf.Max(Mathf.Max(_size.x, _size.y), _size.z); i++)
+           {
+             var simXFace = _cubePartsList.Where(c => Math.Abs(c.transform.localPosition.x - -i) < 0.01f).ToList();
+             var simYFace = _cubePartsList.Where(c => Math.Abs(c.transform.localPosition.y - -i) < 0.01f).ToList();
+             var simZFace = _cubePartsList.Where(c => Math.Abs(c.transform.localPosition.z - i) < 0.01f).ToList();
+             if (_size.x >= i)
+             {
+               _cubeBigFaces.Add(new CubeBigFace(simXFace));
+             }
+             if (_size.y >= i)
+             {
+               _cubeBigFaces.Add(new CubeBigFace(simYFace));
+             }
+             if (_size.z >= i)
+             {
+               _cubeBigFaces.Add(new CubeBigFace(simZFace));
+             }
+           }
+           allBigFaces = _cubeBigFaces;
+         }
   }
 }
