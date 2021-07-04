@@ -8,33 +8,16 @@ namespace CodeBase.Controls.CubeRub
     public class CubeBigFace
     {
         public List<GameObject> FaceCubePieces = new List<GameObject>();
-        public Similar Similar;
+        public Vector3 similar;
 
-        public CubeBigFace(List<GameObject> _pieces, Similar _similar)
+        public CubeBigFace(List<GameObject> _pieces)
         {
             FaceCubePieces = _pieces;
             foreach (var piece in _pieces)
             {
                 piece.GetComponent<CubePiece>().Planes.Add(this);
             }
-            Similar = _similar;
+            //similar = _similar;
         }
-    }
-
-    public class Similar
-    {
-        public Axis _similarAxis;
-        public int _axisPosition;
-
-        public Similar(Axis axis, int pos)
-        {
-            _similarAxis = axis;
-            _axisPosition = pos;
-        }
-    }
-
-    public enum Axis
-    {
-        x,y,z
     }
 }
