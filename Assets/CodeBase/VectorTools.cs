@@ -1,8 +1,7 @@
 using UnityEngine;
 
-public class VectorTools
+public static class VectorTools
 {
-    
     public static Vector3 GetBiggestAxis(Vector3 a)
     {
         if (Mathf.Abs(a.x) > Mathf.Abs(a.y) && Mathf.Abs(a.x) > Mathf.Abs(a.z))
@@ -18,7 +17,7 @@ public class VectorTools
 
     public static bool IsBiggestPositiv(Vector3 a)
     {
-        float value = 0;
+        float value;
         if (Mathf.Abs(a.x) > Mathf.Abs(a.y) && Mathf.Abs(a.x) > Mathf.Abs(a.z))
         {
             value = a.x;
@@ -34,14 +33,27 @@ public class VectorTools
 
         return value > 0;
     }
-    
-
-    public static Vector3 FillZeros(Vector3 toFill, Vector3 fill)
+    private static Vector3 GetFlatPoint(Vector3 firstPoint, Vector3 secondPoint, Vector3 IgnorAxis)
     {
-        var result = toFill;
-        if (result.x == 0) result.x = fill.x;
-        if (result.y == 0) result.y = fill.y;
-        if (result.z == 0) result.z = fill.z;
+        var result = secondPoint;
+        if (Mathf.Abs(IgnorAxis.x) > 0.00001f)
+        {
+            result.x = firstPoint.x;
+        }
+        else if(Mathf.Abs(IgnorAxis.y) > 0.00001f)
+        {
+            result.y = firstPoint.y;
+        }else if (Mathf.Abs(IgnorAxis.z) > 0.00001f)
+        {
+            result.z = firstPoint.z;
+        }
         return result;
+    }
+  
+    public static Vector3 GetSecondLinePoint(Vector3 firstPoint, Vector3 secondPoint,Vector3 IgnorAxis)
+    {
+
+        var result = GetFlatPoint(firstPoint, secondPoint, IgnorAxis) - firstPoint;
+        return firstPoint + GetBiggestAxis(result);
     }
 }

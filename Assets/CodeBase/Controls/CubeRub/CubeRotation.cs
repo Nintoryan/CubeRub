@@ -27,33 +27,32 @@ namespace CodeBase.Controls.CubeRub
     private void RotateCubeFace(Axis same, float position, bool isForward = true)
     {
       List<GameObject> pieces;
-      var rotationAxes = new Vector3();
+      Vector3 rotationAxesVector;
       switch (same)
       {
         case Axis.x:
           pieces = _spawnCube.CubePartsList.FindAll(c =>
             Math.Abs(Mathf.Round(c.transform.localPosition.x) - position) < TOLERANCE);
-          rotationAxes = new Vector3(1,0,0);
+          rotationAxesVector = new Vector3(1,0,0);
           break;
         case Axis.y:
           pieces = _spawnCube.CubePartsList.FindAll(c =>
             Math.Abs(Mathf.Round(c.transform.localPosition.y) - position) < TOLERANCE);
-          rotationAxes = new Vector3(0,1,0);
+          rotationAxesVector = new Vector3(0,1,0);
           break;
         case Axis.z:
           pieces = _spawnCube.CubePartsList.FindAll(c =>
             Math.Abs(Mathf.Round(c.transform.localPosition.z) - position) < TOLERANCE);
-          rotationAxes = new Vector3(0,0,1);
+          rotationAxesVector = new Vector3(0,0,1);
           break;
         default:
           throw new ArgumentOutOfRangeException(nameof(same), same, null);
       }
-
       if (!isForward)
       {
-        rotationAxes *= -1;
+        rotationAxesVector *= -1;
       }
-      StartCoroutine(Rotate(pieces, rotationAxes));
+      StartCoroutine(Rotate(pieces, rotationAxesVector));
     }
     
 
