@@ -576,7 +576,6 @@ MonoBehaviour:
   _centerPivot: {fileID: 439801924}
   _cubeTemplate: {fileID: -405851920192575463, guid: 11191dcf8534ec84ca72d37618ffdbb8, type: 3}
   _size: {x: 3, y: 3, z: 3}
-  _cubeRotation: {fileID: 1138784629}
 --- !u!4 &1138784628
 Transform:
   m_ObjectHideFlags: 0
