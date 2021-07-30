@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using CubeRub.LevelGenerator;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace CubeRub.Controls.CubeRub
 {
@@ -14,6 +15,7 @@ namespace CubeRub.Controls.CubeRub
     private bool _canRotate = true;
     private Transform _selectedPiece;
     private static CubeRotation Instance;
+    public static event UnityAction OnCubeRotated; 
 
     private void Start()
     {
@@ -61,9 +63,6 @@ namespace CubeRub.Controls.CubeRub
       }
       StartCoroutine(Rotate(pieces, rotationAxesVector));
     }
-    
-
-    public event Action Roating;
 
     #region AxesRotation
 
@@ -152,7 +151,7 @@ namespace CubeRub.Controls.CubeRub
 
       _canRotate = true;
       
-      Roating?.Invoke();
+      OnCubeRotated?.Invoke();
     }
   }
 
