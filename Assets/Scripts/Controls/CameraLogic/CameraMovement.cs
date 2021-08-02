@@ -6,9 +6,10 @@ namespace CubeRub.Controls
 {
   public class CameraMovement : MonoBehaviour
   {
+    [Header("Same as prebuild Rotation")]
+    [SerializeField] private Vector3 _localRotation;
     private Cube _cube;
     private Touchpad _touchpad;
-    private Vector3 _localRotation;
     private bool _cameraDisable;
     private Camera _mainCamera;
 

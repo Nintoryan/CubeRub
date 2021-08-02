@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using CubeRub.Car;
 using CubeRub.LevelGenerator;
 using UnityEngine;
 using UnityEngine.Events;
@@ -56,7 +57,7 @@ namespace CubeRub.Controls.CubeRub
         Debug.LogWarning("Attempting to rotate whole cube!");
         return;
       }
-        
+
       if (!isForward)
       {
         rotationAxesVector *= -1;

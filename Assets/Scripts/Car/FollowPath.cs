@@ -1,77 +1,111 @@
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using CubeRub.Controls.CubeRub;
+using CubeRub.LevelGenerator;
 using DG.Tweening;
+using Score;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class FollowPath : MonoBehaviour
+namespace CubeRub.Car
 {
-    [SerializeField] private List<Transform> Points;
-    [SerializeField] private float Speed;
-    [SerializeField] private float NearPoinTreshold;
-
-    private int _currentID = 0;
-    private Transform CurrentPoint => Points[_currentID];
-
-    private Transform NextPoint
+    public class FollowPath : MonoBehaviour
     {
-        get
+        [SerializeField] private List<CubePiece> _cubePieces;
+        [SerializeField] private float Speed;
+        [SerializeField] private float NearPoinTreshold;
+
+        private int _currentID;
+        private Path CurrentPath => _cubePieces[_currentID].carPath;
+
+        private Path NextPath => _currentID + 1 < _cubePieces.Count ? _cubePieces[_currentID + 1].carPath : null;
+        
+        private bool isGoing;
+        private UnityAction OnCarStoped;
+        private void OnDrawGizmos()
         {
-            if (_currentID + 1 < Points.Count)
+            foreach (var t in _cubePieces)
             {
-                return Points[_currentID + 1];
-            }
-            else
-            {
-                return null;
+                Gizmos.color = Color.black;
+                for (var j = 1; j < t.carPath.PathPoints.Count; j++)
+                {
+                    if (t.carPath.PathPoints[j - 1] == null || t.carPath.PathPoints[j] == null) continue;
+                    if (isPointsNear(t.carPath.PathPoints[j - 1].transform, t.carPath.PathPoints[j].transform))
+                        Gizmos.DrawLine(t.carPath.PathPoints[j - 1].Position, t.carPath.PathPoints[j].Position);
+
+                }
             }
         }
-    }
 
-    private void OnDrawGizmos()
-    {
-        
-        
-        for (int i = 0; i < Points.Count; i++)
+        private void OnEnable()
         {
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawWireSphere(Points[i].position,NearPoinTreshold/2);
-            if(i == Points.Count-1) return;
-            Gizmos.color = Color.black;
-            if(isPointsNear(Points[i],Points[i+1]))
-                Gizmos.DrawLine(Points[i].position,Points[i+1].position);
+            CubeRotation.OnCubeRotated += TryToGo;
         }
-    }
 
-    private void OnEnable()
-    {
-        CubeRotation.OnCubeRotated += TryToGo;
-    }
-
-    private void OnDestroy()
-    {
-        CubeRotation.OnCubeRotated -= TryToGo;
-    }
-
-    private void Start()
-    {
-        transform.position = CurrentPoint.position;
-        TryToGo();
-    }
-
-    private void TryToGo()
-    {
-        var s = DOTween.Sequence();
-        while (isPointsNear(CurrentPoint,NextPoint))
+        private void OnDestroy()
         {
-            //s.AppendCallback(() => { transform.LookAt(NextPoint); });
-            s.Append(transform.DOMove(NextPoint.position, Speed).SetSpeedBased());
+            CubeRotation.OnCubeRotated -= TryToGo;
+        }
+
+        private void Start()
+        {
+            transform.position = CurrentPath.FirstPosition;
+            transform.SetParent(CurrentPath.transform);
+            GoThroughPath(CurrentPath.PathPositions.Where(p => p != CurrentPath.FirstPosition).ToArray());
+        }
+
+        private void TryToGo()
+        {
+            if (!isPathsNear(CurrentPath, NextPath)) return;
+            if (isGoing)
+            {
+                OnCarStoped += TryToGo;
+                return;
+            }
+            LevelScore.IncreaseScore();
+            transform.SetParent(NextPath.transform);
+            transform.DOLookAt(NextPath.FirstPosition, 0.1f);
+            GoThroughPath(NextPath.PathPositions);
             _currentID++;
         }
-    }
-    private bool isPointsNear(Transform p1, Transform p2)
-    {
-        if (p1 == null || p2 == null) return false;
-        return Vector3.Distance(p1.position, p2.position) < NearPoinTreshold;
+        
+        private void GoThroughPath(IEnumerable<Vector3> path)
+        {
+            var s = DOTween.Sequence();
+            isGoing = true;
+            foreach (var point in path)
+            {
+                s.AppendCallback(() =>
+                {
+                    var ray = new Ray(transform.position, CurrentPath.transform.position);
+                    if (Physics.Raycast(ray, out var hit))
+                    {
+                        var pieceFace = hit.collider.gameObject.GetComponent<PieceFace>();
+                        if (pieceFace != null)
+                        {
+                            transform.LookAt(point, -pieceFace.transform.forward);
+                        }
+                    }
+                });
+                s.Append(transform.DOMove(point, Speed).SetEase(Ease.Linear).SetSpeedBased(true));
+            }
+            s.AppendCallback(() =>
+            {
+                isGoing = false;
+                OnCarStoped?.Invoke();
+            });
+        }
+
+        private bool isPathsNear(Path p1, Path p2)
+        {
+            if (p1 == null || p2 == null) return false;
+            return isPointsNear(p1.LastPoint, p2.FirstPoint) || isPointsNear(p1.FirstPoint, p2.LastPoint);
+        }
+
+        private bool isPointsNear(Transform p1, Transform p2)
+        {
+            if (p1 == null || p2 == null) return false;
+            return Vector3.Distance(p1.position, p2.position) < NearPoinTreshold;
+        }
     }
 }
