@@ -11,9 +11,11 @@ namespace CubeRub.Car
 {
     public class FollowPath : MonoBehaviour
     {
+        private static float NearPoinTreshold = 0.2f;
+        
         [SerializeField] private List<CubePiece> _cubePieces;
         [SerializeField] private float Speed;
-        [SerializeField] private float NearPoinTreshold;
+        
 
         private int _currentID;
         private Path CurrentPath => _cubePieces[_currentID].carPath;
@@ -22,20 +24,6 @@ namespace CubeRub.Car
         
         private bool isGoing;
         private UnityAction OnCarStoped;
-        private void OnDrawGizmos()
-        {
-            foreach (var t in _cubePieces)
-            {
-                Gizmos.color = Color.black;
-                for (var j = 1; j < t.carPath.PathPoints.Count; j++)
-                {
-                    if (t.carPath.PathPoints[j - 1] == null || t.carPath.PathPoints[j] == null) continue;
-                    if (isPointsNear(t.carPath.PathPoints[j - 1].transform, t.carPath.PathPoints[j].transform))
-                        Gizmos.DrawLine(t.carPath.PathPoints[j - 1].Position, t.carPath.PathPoints[j].Position);
-
-                }
-            }
-        }
 
         private void OnEnable()
         {
@@ -51,7 +39,7 @@ namespace CubeRub.Car
         {
             transform.position = CurrentPath.FirstPosition;
             transform.SetParent(CurrentPath.transform);
-            GoThroughPath(CurrentPath.PathPositions.Where(p => p != CurrentPath.FirstPosition).ToArray());
+            GoThroughPath(CurrentPath.PathPoints.Where(p => p != CurrentPath.PathPoints.First()).ToArray());
         }
 
         private void TryToGo()
@@ -65,11 +53,11 @@ namespace CubeRub.Car
             LevelScore.IncreaseScore();
             transform.SetParent(NextPath.transform);
             transform.DOLookAt(NextPath.FirstPosition, 0.1f);
-            GoThroughPath(NextPath.PathPositions);
+            GoThroughPath(NextPath.PathPoints);
             _currentID++;
         }
         
-        private void GoThroughPath(IEnumerable<Vector3> path)
+        private void GoThroughPath(IEnumerable<PathPoint> path)
         {
             var s = DOTween.Sequence();
             isGoing = true;
@@ -77,17 +65,9 @@ namespace CubeRub.Car
             {
                 s.AppendCallback(() =>
                 {
-                    var ray = new Ray(transform.position, CurrentPath.transform.position);
-                    if (Physics.Raycast(ray, out var hit))
-                    {
-                        var pieceFace = hit.collider.gameObject.GetComponent<PieceFace>();
-                        if (pieceFace != null)
-                        {
-                            transform.LookAt(point, -pieceFace.transform.forward);
-                        }
-                    }
+                    transform.LookAt(point.Position, transform.up);
                 });
-                s.Append(transform.DOMove(point, Speed).SetEase(Ease.Linear).SetSpeedBased(true));
+                s.Append(transform.DOMove(point.Position, Speed).SetEase(Ease.Linear).SetSpeedBased(true));
             }
             s.AppendCallback(() =>
             {
@@ -102,10 +82,12 @@ namespace CubeRub.Car
             return isPointsNear(p1.LastPoint, p2.FirstPoint) || isPointsNear(p1.FirstPoint, p2.LastPoint);
         }
 
-        private bool isPointsNear(Transform p1, Transform p2)
+        public static bool isPointsNear(Transform p1, Transform p2)
         {
             if (p1 == null || p2 == null) return false;
             return Vector3.Distance(p1.position, p2.position) < NearPoinTreshold;
         }
+
+        
     }
 }

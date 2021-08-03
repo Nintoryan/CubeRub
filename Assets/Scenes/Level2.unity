@@ -628,6 +628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c380d09793a51f4cbadb8e2bc3fcb93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  up: {x: 0, y: 0.02, z: -0.12}
 --- !u!1 &149100325
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,6 +658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c380d09793a51f4cbadb8e2bc3fcb93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  up: {x: 0, y: 0.07, z: -0.12}
 --- !u!4 &149100327
 Transform:
   m_ObjectHideFlags: 0
@@ -782,6 +784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c380d09793a51f4cbadb8e2bc3fcb93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  up: {x: 0, y: 0.1, z: 0}
 --- !u!1 &179704619
 GameObject:
   m_ObjectHideFlags: 0
@@ -811,6 +814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c380d09793a51f4cbadb8e2bc3fcb93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  up: {x: -0.13, y: 0, z: 0}
 --- !u!4 &179704621
 Transform:
   m_ObjectHideFlags: 0
@@ -962,6 +966,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c380d09793a51f4cbadb8e2bc3fcb93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  up: {x: 0, y: 0.1, z: 0}
 --- !u!4 &276476147
 Transform:
   m_ObjectHideFlags: 0
@@ -1578,6 +1583,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c380d09793a51f4cbadb8e2bc3fcb93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  up: {x: 0, y: 0.1, z: 0}
 --- !u!1001 &674289764
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2250,6 +2256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c380d09793a51f4cbadb8e2bc3fcb93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  up: {x: 0, y: 0, z: -0.16}
 --- !u!4 &773639003
 Transform:
   m_ObjectHideFlags: 0
@@ -2307,6 +2314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c380d09793a51f4cbadb8e2bc3fcb93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  up: {x: 0, y: 0, z: -0.16}
 --- !u!1 &887489319
 GameObject:
   m_ObjectHideFlags: 0
@@ -2350,6 +2358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c380d09793a51f4cbadb8e2bc3fcb93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  up: {x: -0.13, y: 0, z: 0}
 --- !u!1 &896503171
 GameObject:
   m_ObjectHideFlags: 0
@@ -2393,6 +2402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c380d09793a51f4cbadb8e2bc3fcb93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  up: {x: -0.13, y: 0, z: 0}
 --- !u!1 &911527465
 GameObject:
   m_ObjectHideFlags: 0
@@ -2436,6 +2446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c380d09793a51f4cbadb8e2bc3fcb93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  up: {x: 0, y: 0, z: -0.16}
 --- !u!1 &948084908
 GameObject:
   m_ObjectHideFlags: 0
@@ -2822,6 +2833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c380d09793a51f4cbadb8e2bc3fcb93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  up: {x: -0.13, y: 0, z: 0}
 --- !u!1 &1314017440
 GameObject:
   m_ObjectHideFlags: 0
@@ -3085,6 +3097,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c380d09793a51f4cbadb8e2bc3fcb93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  up: {x: 0, y: 0.1, z: 0}
 --- !u!1 &1532231613
 GameObject:
   m_ObjectHideFlags: 0
@@ -3264,6 +3277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c380d09793a51f4cbadb8e2bc3fcb93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  up: {x: 0, y: 0, z: -0.16}
 --- !u!1 &1662847941
 GameObject:
   m_ObjectHideFlags: 0
@@ -3380,7 +3394,6 @@ MonoBehaviour:
   - {fileID: 18072215}
   - {fileID: 948084909}
   Speed: 1
-  NearPoinTreshold: 0.2
 --- !u!4 &1695086806
 Transform:
   m_ObjectHideFlags: 0
@@ -3439,6 +3452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c380d09793a51f4cbadb8e2bc3fcb93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  up: {x: 0, y: 0.1, z: 0}
 --- !u!1 &1774957752
 GameObject:
   m_ObjectHideFlags: 0
@@ -4042,6 +4056,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c380d09793a51f4cbadb8e2bc3fcb93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  up: {x: 0, y: 0, z: -0.16}
 --- !u!4 &2064861545
 Transform:
   m_ObjectHideFlags: 0

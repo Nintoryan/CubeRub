@@ -56,4 +56,14 @@ public static class VectorTools
         var result = GetFlatPoint(firstPoint, secondPoint, IgnorAxis) - firstPoint;
         return firstPoint + GetBiggestAxis(result);
     }
+
+    public static bool isSameX(Vector2 p1, Vector2 p2)
+    {
+        return Mathf.Abs(p1.x) - Mathf.Abs(p2.x) <= 0.0001f;
+    }
+    public static bool isSameY(Vector2 p1, Vector2 p2)
+    {
+        return Mathf.Abs(p1.y) - Mathf.Abs(p2.y) <= 0.0001f;
+    }
+
 }
