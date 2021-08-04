@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using PathCreation;
+using UnityEngine;
 namespace CubeRub.LevelGenerator
 {
   public class CubePiece : MonoBehaviour
@@ -9,8 +10,6 @@ namespace CubeRub.LevelGenerator
     public PieceFace DownFace;
     public PieceFace LeftFace;
     public PieceFace RightFace;
-
-    public Path carPath;
 
     public void Initialize(int x, int y, int z, Vector3Int size)
     {

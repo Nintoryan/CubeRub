@@ -2,6 +2,7 @@ using UnityEngine;
 
 public static class VectorTools
 {
+    const float NearPoinTreshold = 0.05f;
     public static Vector3 GetBiggestAxis(Vector3 a)
     {
         if (Mathf.Abs(a.x) > Mathf.Abs(a.y) && Mathf.Abs(a.x) > Mathf.Abs(a.z))
@@ -55,5 +56,14 @@ public static class VectorTools
 
         var result = GetFlatPoint(firstPoint, secondPoint, IgnorAxis) - firstPoint;
         return firstPoint + GetBiggestAxis(result);
+    }
+    public static bool isPointsNear(Transform p1, Transform p2)
+    {
+        if (p1 == null || p2 == null) return false;
+        return isPointsNear(p1.position, p2.position);
+    }
+    public static bool isPointsNear(Vector3 p1, Vector3 p2)
+    {
+        return Vector3.Distance(p1, p2) < NearPoinTreshold;
     }
 }

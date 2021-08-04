@@ -16,7 +16,9 @@ namespace CubeRub.Controls.CubeRub
     private bool _canRotate = true;
     private Transform _selectedPiece;
     private static CubeRotation Instance;
-    public static event UnityAction OnCubeRotated; 
+    public static event UnityAction OnCubeRotated;
+    public static event UnityAction<List<GameObject>> OnRotationStart;
+    public static event UnityAction<List<GameObject>> OnRotationEnd;
 
     private void Start()
     {
@@ -139,6 +141,7 @@ namespace CubeRub.Controls.CubeRub
     {
       var angele = 0;
       _canRotate = false;
+      OnRotationStart?.Invoke(listCubePieces);
 
       while (angele < 90)
       {
@@ -153,6 +156,7 @@ namespace CubeRub.Controls.CubeRub
       _canRotate = true;
       
       OnCubeRotated?.Invoke();
+      OnRotationEnd?.Invoke(listCubePieces);
     }
   }
 
