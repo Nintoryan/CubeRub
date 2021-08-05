@@ -1,4 +1,3 @@
-using CubeRub.Controls.Inputs;
 using CubeRub.LevelGenerator;
 using UnityEngine;
 
@@ -9,24 +8,31 @@ namespace CubeRub.Controls
     [Header("Same as prebuild Rotation")]
     [SerializeField] private Vector3 _localRotation;
     private Cube _cube;
-    private Touchpad _touchpad;
-    private bool _cameraDisable;
     private Camera _mainCamera;
+    private bool isOnCube;
+    
 
     private void Awake()
     {
-      _touchpad = FindObjectOfType<Touchpad>();
       _cube = FindObjectOfType<Cube>();
       _mainCamera = Camera.main;
       _cube.OnCalculated += () => transform.parent.position = _cube.CenterPiece.position;
     }
-
+    
     private void LateUpdate()
     {
+      if (Input.GetMouseButtonUp(0))
+      {
+        isOnCube = false;
+      }
       if (Input.GetMouseButton(0))
       {
-        var ray = _mainCamera.ScreenPointToRay(_touchpad.PressingPosition);
-        if (Physics.Raycast(ray, out _, Mathf.Infinity)) return;
+        var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out _, Mathf.Infinity) && Input.GetMouseButtonDown(0))
+        {
+          isOnCube = true;
+        }
+        if(isOnCube) return;
         
         _localRotation.x += Input.GetAxis("Mouse X") * 5;
         _localRotation.y += Input.GetAxis("Mouse Y") * -5;
@@ -37,5 +43,6 @@ namespace CubeRub.Controls
       var parent = transform.parent;
       parent.rotation = Quaternion.Lerp(parent.rotation, qt, Time.deltaTime * 15);
     }
+    
   }
 }

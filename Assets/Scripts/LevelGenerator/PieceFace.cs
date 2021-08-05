@@ -54,11 +54,13 @@ namespace CubeRub.LevelGenerator
       {
         RotationAxis = Axis.x;
       }
-      else if (Mathf.Round(IgnorAxis.y) == 0 && Mathf.Round(inputResult.y) == 0)
+      
+      if (Mathf.Round(IgnorAxis.y) == 0 && Mathf.Round(inputResult.y) == 0)
       {
         RotationAxis = Axis.y;
       }
-      else if (Mathf.Round(IgnorAxis.z) == 0 && Mathf.Round(inputResult.z) == 0)
+      
+      if (Mathf.Round(IgnorAxis.z) == 0 && Mathf.Round(inputResult.z) == 0)
       {
         RotationAxis = Axis.z;
       }

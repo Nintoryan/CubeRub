@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System.Collections.Generic;
 using CubeRub.LevelGenerator;
 using UnityEditor.SceneManagement;
@@ -43,3 +44,4 @@ public class CubeTemplateGenerator : MonoBehaviour
         EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
     }
 }
+#endif

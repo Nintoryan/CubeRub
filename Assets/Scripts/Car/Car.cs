@@ -1,43 +1,36 @@
-using PathCreation;
-using Score;
+using CubeRub.Car;
 using UnityEngine;
 
-namespace CubeRub.Car
+public class Car : MonoBehaviour
 {
-    public class Car : MonoBehaviour
+    public TriggersDetector _Detector;
+    [SerializeField] private InGameUI _inGameUI;
+    
+
+    private void Awake()
     {
-        public PathCreator[] pathCreators;
-        public float Speed;
-        private float distanceTravelled;
-        private int pathID;
-
-        private PathCreator currentPath => pathCreators[pathID];
-        private PathCreator nextPath => pathID+1 < pathCreators.Length ? pathCreators[pathID+1] : null;
-
-        private void Start()
+        if (_inGameUI == null)
         {
-            transform.SetParent(currentPath.transform);
-        }
-
-        private void Update()
-        {
-            if (distanceTravelled < currentPath.path.length-0.05f)
+            _inGameUI = FindObjectOfType<InGameUI>();
+            if (_inGameUI == null)
             {
-                distanceTravelled += Speed * Time.deltaTime;
-                transform.position = currentPath.path.GetPointAtDistance(distanceTravelled);
-                transform.rotation = currentPath.path.GetRotationAtDistance(distanceTravelled);
-            }
-            else
-            {
-                if(nextPath == null) return;
-                if (VectorTools.isPointsNear(nextPath.path.GetClosestPointOnPath(transform.position),transform.position))
-                {
-                    LevelScore.IncreaseScore();
-                    distanceTravelled = 0;
-                    pathID++;
-                    transform.SetParent(currentPath.transform);
-                }
+                Debug.LogError("No inGameUI detected!");
             }
         }
+
+        if (_Detector == null)
+        {
+            _Detector = GetComponentInChildren<TriggersDetector>();
+        }
+    }
+
+    private void OnEnable()
+    {
+        _Detector.OnFinishReached += _inGameUI.OpenLevelCompleteWindow;
+    }
+
+    private void OnDestroy()
+    {
+        _Detector.OnFinishReached -= _inGameUI.OpenLevelCompleteWindow;
     }
 }

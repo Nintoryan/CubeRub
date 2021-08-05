@@ -2,7 +2,7 @@ using UnityEngine;
 
 public static class VectorTools
 {
-    const float NearPoinTreshold = 0.05f;
+    const float NearPoinTreshold = 0.075f;
     public static Vector3 GetBiggestAxis(Vector3 a)
     {
         if (Mathf.Abs(a.x) > Mathf.Abs(a.y) && Mathf.Abs(a.x) > Mathf.Abs(a.z))
