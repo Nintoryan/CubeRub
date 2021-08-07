@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,12 +9,13 @@ public class InGameUI : MonoBehaviour
     [SerializeField] private RectTransform _levelCompleteWindow;
     [SerializeField] private RectTransform _gameplayWindow;
     [SerializeField] private RectTransform _menuWindow;
+    [SerializeField] private TMP_Text _levelName;
 
 
     private void Start()
     {
         _gameplayWindow.gameObject.SetActive(!isInMenu);
-
+        _levelName.text = $"LEVEL {LevelProgressHandler.CurrentLevelID + 1}";
         _menuWindow.gameObject.SetActive(isInMenu);
     }
 
