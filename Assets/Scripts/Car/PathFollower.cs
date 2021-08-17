@@ -43,7 +43,7 @@ namespace CubeRub.Car
             searchingPool = searchingPool.FindAll(p => p != null);
 
             var nextPath = searchingPool.Find(p =>
-                VectorTools.isPointsNear(p.path.GetClosestPointOnPath(transform.position), transform.position));
+                VectorTools.isPointsNear(p.path.GetPointAtDistance(0), transform.position));
             if(nextPath == null) return;
             
             currentPath = nextPath;
