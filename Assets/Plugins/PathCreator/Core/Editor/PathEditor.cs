@@ -342,7 +342,8 @@ namespace PathCreationEditor {
                 Handles.DrawLines (normalLines);
             }
         }
-
+        
+        
         void ProcessBezierPathInput (Event e) {
             // Find which handle mouse is over. Start by looking at previous handle index first, as most likely to still be closest to mouse
             int previousMouseOverHandleIndex = (mouseOverHandleIndex == -1) ? 0 : mouseOverHandleIndex;
@@ -674,6 +675,11 @@ namespace PathCreationEditor {
 
             SceneView.RepaintAll ();
             EditorApplication.QueuePlayerLoopUpdate ();
+        }
+
+        void FlipPathPoints()
+        {
+            
         }
 
         void OnPathModifed () {

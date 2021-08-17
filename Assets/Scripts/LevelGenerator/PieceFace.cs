@@ -7,10 +7,14 @@ namespace CubeRub.LevelGenerator
 {
   public class PieceFace : MonoBehaviour
   {
+    private const float InputThreshhold = 0.2f;
     private Vector3 IgnorAxis => GetBiggestAxis(-transform.forward);
     private Camera _camera;
     private bool isMouseDown;
 
+    private Vector3 _firstInputPoint;
+    private Vector3 _secondInputPoint;
+    
     private Vector3 _firstLinePoint;
     private Vector3 _secondLinePoint;
 
@@ -22,6 +26,11 @@ namespace CubeRub.LevelGenerator
     private void OnMouseDown()
     {
       _firstLinePoint = transform.position;
+      var ray = _camera.ScreenPointToRay(Input.mousePosition);
+      if (Physics.Raycast(ray, out var hit, Mathf.Infinity))
+      {
+        _firstInputPoint = hit.point;
+      }
       isMouseDown = true;
     }
 
@@ -31,6 +40,7 @@ namespace CubeRub.LevelGenerator
       if (Physics.Raycast(ray, out var hit, Mathf.Infinity))
       {
         _secondLinePoint = GetSecondLinePoint(_firstLinePoint, hit.point, IgnorAxis);
+        _secondInputPoint = hit.point;
       }
     }
 
@@ -41,7 +51,12 @@ namespace CubeRub.LevelGenerator
       var RotationAxis = GetRotationAxis(inputResult);
       var position = GetRotationPosition(RotationAxis);
       var isForward = GetRotationDirection(inputResult, RotationAxis);
-
+      if (Vector3.Distance(_firstInputPoint, _secondInputPoint) < InputThreshhold)
+      {
+        Debug.Log("Input line was less than threshold.");
+        return;
+      }
+      
       CubeRotation.RotateCube(RotationAxis, position, isForward);
 
       Debug.Log($"IgnorAxis:{IgnorAxis};RotationAxis:{RotationAxis}; Position:{position}");

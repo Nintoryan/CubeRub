@@ -1,3 +1,4 @@
+using CubeRub.Car;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,6 +18,10 @@ public class InGameUI : MonoBehaviour
         _gameplayWindow.gameObject.SetActive(!isInMenu);
         _levelName.text = $"LEVEL {LevelProgressHandler.CurrentLevelID + 1}";
         _menuWindow.gameObject.SetActive(isInMenu);
+        if (!isInMenu)
+        {
+            TapToPlay();    
+        }
     }
 
     public void OpenLevelCompleteWindow()
@@ -41,7 +46,7 @@ public class InGameUI : MonoBehaviour
     {
         _menuWindow.gameObject.SetActive(false);
         _gameplayWindow.gameObject.SetActive(true);
-        
+        FindObjectOfType<PathFollower>().GoFirstPath();
         isInMenu = false;
     }
 

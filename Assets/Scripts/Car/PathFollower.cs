@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using CubeRub.Controls.CubeRub;
 using PathCreation;
 using Score;
@@ -9,20 +11,23 @@ namespace CubeRub.Car
 {
     public class PathFollower : MonoBehaviour
     {
-        public PathCreator[] pathCreators;
-        public float Speed;
+        [SerializeField] private PathCreator _startPath;
+        [SerializeField] private float Speed;
+        private List<PathCreator> pathCreators = new List<PathCreator>();
         private float distanceTravelled;
-        private int pathID;
-        
-        private PathCreator currentPath => pathCreators.Length > 0 ? pathCreators[pathID] : null;
-        private PathCreator nextPath => pathID+1 < pathCreators.Length ? pathCreators[pathID+1] : null;
-
+        private PathCreator currentPath;
         private UnityAction OnPathDone;
 
-        private void Start()
+        private void Awake()
         {
-            if(currentPath == null) return;
+            pathCreators = FindObjectsOfType<PathCreator>().ToList();
+        }
 
+        public void GoFirstPath()
+        {
+            if(_startPath == null) return;
+            
+            currentPath = _startPath;
             CubeRotation.OnCubeRotated += TryNextPath;
             OnPathDone += TryNextPath;
 
@@ -31,17 +36,19 @@ namespace CubeRub.Car
 
         private void TryNextPath()
         {
+            var searchingPool = pathCreators;
+            searchingPool.Remove(currentPath);
+            
+            var nextPath = searchingPool.Find(p =>
+                VectorTools.isPointsNear(p.path.GetClosestPointOnPath(transform.position), transform.position));
             if(nextPath == null) return;
-            Debug.Log(Vector3.Distance(nextPath.path.GetClosestPointOnPath(transform.position),transform.position));
-            if (VectorTools.isPointsNear(nextPath.path.GetClosestPointOnPath(transform.position),transform.position))
-            {
-                LevelScore.IncreaseScore();
-                distanceTravelled = 0;
-                pathID++;
-                transform.SetParent(currentPath.transform);
-                GoThroughPath(currentPath);
-                
-            }
+            
+            currentPath = nextPath;
+            
+            LevelScore.IncreaseScore();
+            distanceTravelled = 0;
+            transform.SetParent(currentPath.transform);
+            GoThroughPath(currentPath);
         }
 
         private void GoThroughPath(PathCreator path)

@@ -1728,6 +1728,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5458759021885963041, guid: 07f29edf79a907846b5488403873773b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 51.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5458759021885963041, guid: 07f29edf79a907846b5488403873773b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 48.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5458759021885963041, guid: 07f29edf79a907846b5488403873773b, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.3642187
       objectReference: {fileID: 0}
@@ -1885,6 +1893,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: RestartButton
       objectReference: {fileID: 0}
+    - target: {fileID: 5458759021885963041, guid: 07f29edf79a907846b5488403873773b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 62.9551
+      objectReference: {fileID: 0}
+    - target: {fileID: 5458759021885963041, guid: 07f29edf79a907846b5488403873773b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 67.7397
+      objectReference: {fileID: 0}
     - target: {fileID: 7960235882722750209, guid: 07f29edf79a907846b5488403873773b, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -2001,11 +2017,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5458759021885963041, guid: 07f29edf79a907846b5488403873773b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 84
+      value: 67.3284
       objectReference: {fileID: 0}
     - target: {fileID: 5458759021885963041, guid: 07f29edf79a907846b5488403873773b, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 98
+      value: 77.0206
       objectReference: {fileID: 0}
     - target: {fileID: 5458759021885963041, guid: 07f29edf79a907846b5488403873773b, type: 3}
       propertyPath: m_LocalScale.x

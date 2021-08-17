@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace PathCreation {
@@ -72,38 +73,53 @@ namespace PathCreation {
 #if UNITY_EDITOR
 
         // Draw the path when path objected is not selected (if enabled in settings)
-        void OnDrawGizmos () {
-
+        void OnDrawGizmos()
+        {
             // Only draw path gizmo if the path object is not selected
             // (editor script is resposible for drawing when selected)
             GameObject selectedObj = UnityEditor.Selection.activeGameObject;
-            if (selectedObj != gameObject) {
+            if (selectedObj != gameObject)
+            {
 
-                if (path != null) {
-                    path.UpdateTransform (transform);
+                if (path != null)
+                {
+                    path.UpdateTransform(transform);
 
-                    if (globalEditorDisplaySettings == null) {
-                        globalEditorDisplaySettings = GlobalDisplaySettings.Load ();
+                    if (globalEditorDisplaySettings == null)
+                    {
+                        globalEditorDisplaySettings = GlobalDisplaySettings.Load();
                     }
 
-                    if (globalEditorDisplaySettings.visibleWhenNotSelected) {
-
+                    if (globalEditorDisplaySettings.visibleWhenNotSelected)
+                    {
                         Gizmos.color = globalEditorDisplaySettings.bezierPath;
 
-                        for (int i = 0; i < path.NumPoints; i++) {
+                        for (int i = 0; i < path.NumPoints; i++)
+                        {
                             int nextI = i + 1;
-                            if (nextI >= path.NumPoints) {
-                                if (path.isClosedLoop) {
+                            if (nextI >= path.NumPoints)
+                            {
+                                if (path.isClosedLoop)
+                                {
                                     nextI %= path.NumPoints;
-                                } else {
+                                }
+                                else
+                                {
                                     break;
                                 }
                             }
-                            Gizmos.DrawLine (path.GetPoint (i), path.GetPoint (nextI));
+
+                            Gizmos.DrawLine(path.GetPoint(i), path.GetPoint(nextI));
                         }
                     }
                 }
             }
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.black;
+            Gizmos.DrawSphere(path.GetPoint(0), 0.075f);
         }
 #endif
 
