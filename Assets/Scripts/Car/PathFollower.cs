@@ -50,6 +50,7 @@ namespace CubeRub.Car
             
             LevelScore.IncreaseScore(_scorePoint.position);
             #if UNITY_ANDROID
+            if(Settings.isVibrationOn)
                 Handheld.Vibrate();
             #endif
             distanceTravelled = 0;
