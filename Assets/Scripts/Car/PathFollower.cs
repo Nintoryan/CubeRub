@@ -18,6 +18,8 @@ namespace CubeRub.Car
         private PathCreator currentPath;
         private UnityAction OnPathDone;
 
+        [SerializeField]private Transform _scorePoint;
+
         private void Awake()
         {
             pathCreators = FindObjectsOfType<PathCreator>().ToList();
@@ -46,7 +48,10 @@ namespace CubeRub.Car
             
             currentPath = nextPath;
             
-            LevelScore.IncreaseScore();
+            LevelScore.IncreaseScore(_scorePoint.position);
+            #if UNITY_ANDROID
+                Handheld.Vibrate();
+            #endif
             distanceTravelled = 0;
             transform.SetParent(currentPath.transform);
             GoThroughPath(currentPath);

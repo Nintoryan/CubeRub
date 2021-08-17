@@ -8,6 +8,7 @@ namespace Score
         private const int ScoreStep = 2;
         
         [SerializeField] private TMP_Text _text;
+        [SerializeField] private CarScoreEffect _carScoreEffect;
 
         private int _currentScore;
 
@@ -28,16 +29,18 @@ namespace Score
             }
         }
 
-        public static void IncreaseScore()
+        public static void IncreaseScore(Vector3 pos)
         {
-            Instance.IncScore();
+            Instance.IncScore(pos);
+            
         }
         
-        private void IncScore()
+        private void IncScore(Vector3 pos)
         {
             AnimateScoreDifference();
             _currentScore += ScoreStep;
             _text.text = CurrentScore.ToString();
+            Instantiate(_carScoreEffect, pos,Quaternion.identity);
         }
 
         private void AnimateScoreDifference()
