@@ -1,3 +1,4 @@
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
@@ -10,14 +11,18 @@ namespace Score
         [SerializeField] private TMP_Text _text;
         [SerializeField] private CarScoreEffect _carScoreEffect;
 
-        private int _currentScore;
-
         private static LevelScore Instance;
-        public static int CurrentScore => Instance._currentScore;
+
+        public static int CurrentScore
+        {
+            get => PlayerPrefs.GetInt("Money");
+            set => PlayerPrefs.SetInt("Money", value);
+        }
 
         private void Start()
         {
             Instance = this;
+            _text.text = $"{CurrentScore} $";
             var lvs = FindObjectsOfType<LevelScore>();
             if (lvs.Length != 1)
             {
@@ -38,14 +43,16 @@ namespace Score
         private void IncScore(Vector3 pos)
         {
             AnimateScoreDifference();
-            _currentScore += ScoreStep;
-            _text.text = CurrentScore.ToString();
+            CurrentScore += ScoreStep;
+            _text.text = $"{CurrentScore} $";
             Instantiate(_carScoreEffect, pos,Quaternion.identity);
         }
 
         private void AnimateScoreDifference()
         {
-            
+            var s = DOTween.Sequence();
+            s.Append(_text.transform.DOScale(1.2f * Vector3.one, 0.2f));
+            s.Append(_text.transform.DOScale(Vector3.one, 0.2f));
         }
     }
 }

@@ -43,15 +43,15 @@ public class Settings : MonoBehaviour
 
     public void OpenSmallSettingsPanel()
     {
-        if (!isOpened)
+        if (isOpened)
         {
             SettingsButton.DORotate(new Vector3(0,0,180),0.5f, RotateMode.FastBeyond360).SetRelative();
-            SettingsSmallPanel.DOAnchorPosX(-80, 0.5f);
+            SettingsSmallPanel.DOAnchorPosX(-120, 0.5f);
         }
         else
         {
             SettingsButton.DORotate(new Vector3(0,0,-180),0.5f, RotateMode.FastBeyond360).SetRelative();
-            SettingsSmallPanel.DOAnchorPosX(80, 0.5f);
+            SettingsSmallPanel.DOAnchorPosX(120, 0.5f);
         }
 
         isOpened = !isOpened;

@@ -909,7 +909,7 @@ RectTransform:
   - {fileID: 776083795}
   - {fileID: 412920680}
   m_Father: {fileID: 2590394549548128380}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1433,6 +1433,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cube: {fileID: 1138784627}
+  _rotate180: 0
 --- !u!114 &1138784630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2407,6 +2408,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1109994579, guid: 1326265dffe1cbd42878a200a4c3dd79, type: 3}
+      propertyPath: m_Name
+      value: Header
+      objectReference: {fileID: 0}
+    - target: {fileID: 2378534406171714698, guid: 1326265dffe1cbd42878a200a4c3dd79, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -337.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426372625040155309, guid: 1326265dffe1cbd42878a200a4c3dd79, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2589587781961891026, guid: 1326265dffe1cbd42878a200a4c3dd79, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2590394549465009011, guid: 1326265dffe1cbd42878a200a4c3dd79, type: 3}
       propertyPath: m_Name
       value: InGameUI
@@ -2497,19 +2514,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2906530713065915813, guid: 1326265dffe1cbd42878a200a4c3dd79, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2906530713065915813, guid: 1326265dffe1cbd42878a200a4c3dd79, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2906530713065915813, guid: 1326265dffe1cbd42878a200a4c3dd79, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 108.869
+      objectReference: {fileID: 0}
+    - target: {fileID: 2906530713065915813, guid: 1326265dffe1cbd42878a200a4c3dd79, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 108.869
       objectReference: {fileID: 0}
     - target: {fileID: 2906530713065915813, guid: 1326265dffe1cbd42878a200a4c3dd79, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 66.39514
       objectReference: {fileID: 0}
     - target: {fileID: 2906530713065915813, guid: 1326265dffe1cbd42878a200a4c3dd79, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -84.4345
       objectReference: {fileID: 0}
     - target: {fileID: 2946448387004139120, guid: 1326265dffe1cbd42878a200a4c3dd79, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2521,19 +2546,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5674179981836155743, guid: 1326265dffe1cbd42878a200a4c3dd79, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5674179981836155743, guid: 1326265dffe1cbd42878a200a4c3dd79, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5674179981836155743, guid: 1326265dffe1cbd42878a200a4c3dd79, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 114.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 5674179981836155743, guid: 1326265dffe1cbd42878a200a4c3dd79, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 114.0936
       objectReference: {fileID: 0}
     - target: {fileID: 5674179981836155743, guid: 1326265dffe1cbd42878a200a4c3dd79, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 66.39514
       objectReference: {fileID: 0}
     - target: {fileID: 5674179981836155743, guid: 1326265dffe1cbd42878a200a4c3dd79, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -223.27055
       objectReference: {fileID: 0}
     - target: {fileID: 8032047471482984206, guid: 1326265dffe1cbd42878a200a4c3dd79, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
