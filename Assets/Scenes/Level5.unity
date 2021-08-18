@@ -5799,6 +5799,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cube: {fileID: 1624231100}
+  _rotate180: 1
 --- !u!4 &1624231102
 Transform:
   m_ObjectHideFlags: 0

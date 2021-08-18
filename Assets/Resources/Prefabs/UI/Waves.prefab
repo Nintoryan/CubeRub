@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9120791601668055198
 RectTransform:
   m_ObjectHideFlags: 0
@@ -197,7 +197,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9120791601748745953}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: d17a8c3ac5ef4ac408443cbe76a653d2, type: 2}
   m_CullingMode: 0
@@ -286,7 +286,7 @@ MonoBehaviour:
   m_DrawShape: 1
   m_ImageType: 0
   m_MaterialMode: 0
-  m_StrokeWidth: 10
+  m_StrokeWidth: 5
   m_OutlineWidth: 0
   m_OutlineColor: {r: 0, g: 0, b: 0, a: 0}
   m_FalloffDistance: 0.5
@@ -375,7 +375,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9120791602579630521
 RectTransform:
   m_ObjectHideFlags: 0

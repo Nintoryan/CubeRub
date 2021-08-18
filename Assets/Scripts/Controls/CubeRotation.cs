@@ -13,6 +13,8 @@ namespace CubeRub.Controls.CubeRub
   {
     private const float TOLERANCE = 0.1f;
     [SerializeField] private Cube Cube;
+    [SerializeField] private bool _rotate180;
+    
     private bool _canRotate = true;
     private Transform _selectedPiece;
     private static CubeRotation Instance;
@@ -20,9 +22,11 @@ namespace CubeRub.Controls.CubeRub
     public static event UnityAction<List<GameObject>> OnRotationStart;
     public static event UnityAction<List<GameObject>> OnRotationEnd;
 
+    private int maxAngle;
     private void Start()
     {
       Instance = this;
+      maxAngle = _rotate180 ? 180 : 90;
     }
 
     public static void RotateCube(Axis same, float position, bool isForward = true)
@@ -143,7 +147,7 @@ namespace CubeRub.Controls.CubeRub
       _canRotate = false;
       OnRotationStart?.Invoke(listCubePieces);
 
-      while (angele < 90)
+      while (angele < maxAngle)
       {
         foreach (var piece in listCubePieces)
           piece.transform.RotateAround(Cube.CenterPiece.position, rotationAxes, 5);

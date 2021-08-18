@@ -6842,6 +6842,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2906530713065915813, guid: 1326265dffe1cbd42878a200a4c3dd79, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2906530713065915813, guid: 1326265dffe1cbd42878a200a4c3dd79, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2906530713065915813, guid: 1326265dffe1cbd42878a200a4c3dd79, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2906530713065915813, guid: 1326265dffe1cbd42878a200a4c3dd79, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5674179981836155743, guid: 1326265dffe1cbd42878a200a4c3dd79, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5674179981836155743, guid: 1326265dffe1cbd42878a200a4c3dd79, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5674179981836155743, guid: 1326265dffe1cbd42878a200a4c3dd79, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5674179981836155743, guid: 1326265dffe1cbd42878a200a4c3dd79, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1326265dffe1cbd42878a200a4c3dd79, type: 3}
 --- !u!1 &1937076935
@@ -7188,6 +7220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cube: {fileID: 1970786341}
+  _rotate180: 1
 --- !u!4 &1970786343
 Transform:
   m_ObjectHideFlags: 0

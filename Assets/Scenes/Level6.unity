@@ -1311,6 +1311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cube: {fileID: 345470269}
+  _rotate180: 1
 --- !u!4 &345470271
 Transform:
   m_ObjectHideFlags: 0
@@ -5308,7 +5309,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4121060670420104304, guid: 5cb1210038b7fa545aa14e281ed3668e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.00000006640578
+      value: -0.000000066407345
       objectReference: {fileID: 0}
     - target: {fileID: 4121060670420104304, guid: 5cb1210038b7fa545aa14e281ed3668e, type: 3}
       propertyPath: m_LocalPosition.z
