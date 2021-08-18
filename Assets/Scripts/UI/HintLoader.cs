@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI
@@ -10,7 +11,7 @@ namespace UI
 
         private void Start()
         {
-            _presenter.sprite = _levelHits[LevelProgressHandler.CurrentLevelID];
+            _presenter.sprite = _levelHits[LevelProgressHandler.CurrentLevelID%_levelHits.Length];
         }
     }
 }
