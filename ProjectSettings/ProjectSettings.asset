@@ -154,7 +154,7 @@ PlayerSettings:
   overrideDefaultApplicationIdentifier: 0
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 21
-  AndroidTargetSdkVersion: 0
+  AndroidTargetSdkVersion: 30
   AndroidPreferredInstallLocation: 1
   aotOptions: 
   stripEngineCode: 1
@@ -228,18 +228,18 @@ PlayerSettings:
   clonedFromGUID: c0afd0d1d80e3634a9dac47e8a0426ea
   templatePackageId: com.unity.template.3d@5.0.4
   templateDefaultScene: Assets/Scenes/SampleScene.unity
-  useCustomMainManifest: 0
+  useCustomMainManifest: 1
   useCustomLauncherManifest: 0
-  useCustomMainGradleTemplate: 0
+  useCustomMainGradleTemplate: 1
   useCustomLauncherGradleManifest: 0
   useCustomBaseGradleTemplate: 0
-  useCustomGradlePropertiesTemplate: 0
+  useCustomGradlePropertiesTemplate: 1
   useCustomProguardFile: 0
-  AndroidTargetArchitectures: 3
+  AndroidTargetArchitectures: -1
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: '{dedicated}: Desktop/VERYIMPORTANTKEY_keystore_keystore.keystore'
-  AndroidKeyaliasName: herbariumgames
+  AndroidKeystoreName: '{inproject}: Assets/Ketchapp/Internal/BuildUtil/keystore_ketchapp.keystore'
+  AndroidKeyaliasName: keystore
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
   AndroidIsGame: 1
@@ -679,8 +679,8 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
-    4: GameAnalytics;AppsFlyer;FacebookSDK;External_Dependency_Manager;MayoSDK
-    7: GameAnalytics;AppsFlyer;FacebookSDK;External_Dependency_Manager;MayoSDK
+    4: GameAnalytics;AppsFlyer;FacebookSDK;External_Dependency_Manager;MayoSDK;JarResolver
+    7: GameAnalytics;AppsFlyer;FacebookSDK;External_Dependency_Manager;MayoSDK;JarResolver
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:

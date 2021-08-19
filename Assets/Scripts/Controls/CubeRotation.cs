@@ -15,7 +15,9 @@ namespace CubeRub.Controls.CubeRub
     [SerializeField] private Cube Cube;
     [SerializeField] private bool _rotate180;
     
+#pragma warning disable 414
     private bool _canRotate = true;
+#pragma warning restore 414
     private Transform _selectedPiece;
     private static CubeRotation Instance;
     public static event UnityAction OnCubeRotated;
