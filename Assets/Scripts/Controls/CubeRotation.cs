@@ -105,42 +105,6 @@ namespace CubeRub.Controls.CubeRub
 
     #endregion Rotation
     
-    private void Update()
-    {
-      if (_canRotate)
-        ChekInput();
-    }
-
-    
-    
-    private void ChekInput()
-    {
-      #region Input
-
-      if (Input.GetKeyDown(KeyCode.Alpha1))
-        StartCoroutine(Rotate(UpPieces, new Vector3(0, 1, 0)));
-      else if (Input.GetKeyDown(KeyCode.Alpha2))
-        StartCoroutine(Rotate(UpPieces, new Vector3(0, -1, 0)));
-
-      else if (Input.GetKeyDown(KeyCode.Alpha3))
-        StartCoroutine(Rotate(LeftPieces, new Vector3(0, 0, -1)));
-      else if (Input.GetKeyDown(KeyCode.Alpha4))
-        StartCoroutine(Rotate(RightPieces, new Vector3(0, 0, 1)));
-
-      else if (Input.GetKeyDown(KeyCode.Alpha5))
-        StartCoroutine(Rotate(FrontPieces, new Vector3(1, 0, 0)));
-      else if (Input.GetKeyDown(KeyCode.Alpha6))
-        StartCoroutine(Rotate(BackPieces, new Vector3(-1, 0, 0)));
-
-      else if (Input.GetKeyDown(KeyCode.Alpha8))
-        StartCoroutine(Rotate(CenterXPieces, new Vector3(-1, 0, 0)));
-      else if (Input.GetKeyDown(KeyCode.Alpha9))
-        StartCoroutine(Rotate(CenterYPieces, new Vector3(0, -1, 0)));
-      else if (Input.GetKeyDown(KeyCode.Alpha0))
-        StartCoroutine(Rotate(CenterZPieces, new Vector3(0, 0, -1)));
-
-      #endregion
-    }
     private IEnumerator Rotate(List<GameObject> listCubePieces, Vector3 rotationAxes)
     {
       var angele = 0;

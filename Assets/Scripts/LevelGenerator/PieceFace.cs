@@ -42,8 +42,8 @@ namespace CubeRub.LevelGenerator
         _secondLinePoint = GetSecondLinePoint(_firstLinePoint, hit.point, IgnorAxis);
         _secondInputPoint = hit.point;
       }
+      Debug.Log($"Distance:{Vector3.Distance(_firstInputPoint,_secondInputPoint)}");
     }
-
     private void OnMouseUp()
     {
       isMouseDown = false;
