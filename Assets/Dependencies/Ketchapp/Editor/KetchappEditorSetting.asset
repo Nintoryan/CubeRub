@@ -17,7 +17,8 @@ MonoBehaviour:
   KetchappKeystoreSigning: 1
   MinApiVersionAndroid: 21
   ApiTargetAndroid: 30
-  AndroidBuildWorkflow: 2
+  AndroidBuildWorkflow: 0
+  BundleId: 
   MayoVersion:
     Version: 
     Name: 
